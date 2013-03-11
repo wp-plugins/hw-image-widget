@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
 			evt.preventDefault();
 			currentWidget = evt.currentTarget;
 			var tbHeight = Math.floor(jQuery(window).height() * 0.8);
-			tb_show('HW Image Widget', 'media-upload.php?type=images&post_mime_type=image&tab=library&TB_iframe=true&width=640&height=' + tbHeight);
+			tb_show('HW Image Widget', 'media-upload.php?post_id=0&type=image&context=hwim&post_mime_type=image&tab=library&TB_iframe=true&width=640&height=' + tbHeight);
 		}
 		/* Remove image from widget. */
 		if (jQuery(evt.srcElement).hasClass('remove-image')) {
