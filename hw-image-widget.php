@@ -160,7 +160,7 @@ class HW_Image_Widget extends \WP_Widget {
 		echo $before_widget;
 
 		if ( '' != trim( $instance['title'] ) ) {
-			echo apply_filter( 'hwim_title', $before_title . $instance['title'] . $after_title );
+			echo apply_filters( 'hwim_title', $before_title . $instance['title'] . $after_title );
 		}
 
 		// Allow theme to supply a non-standard template.

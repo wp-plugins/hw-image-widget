@@ -3,7 +3,7 @@ Contributors: puffythepirateboy
 Tags: image widget, image, widget, responsive
 Requires at least: 3.4
 Tested up to: 3.5.1
-Stable tag: 1.0
+Stable tag: 1.1
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -15,7 +15,7 @@ Primary features of HW Image Widget:
 
 * Allow you to choose responsive or fixed behavior.
 * Uses TinyMCE for rich text editing of the image text field.
-* Allow you to create a custom widget HTML-template in the active theme to ovveride the default layout.
+* Allow you to create a custom widget HTML-template in the active theme to override the default layout.
 * Default settings can be overridden using filter.
 * Available in English and Swedish.
 
@@ -74,6 +74,9 @@ For this to work that filter will need to be registered prior to admin_enqueue_s
 4. Selecting an image.
 
 == Changelog ==
+
+= 1.1 =
+* Fixed front-end display issue.
 
 = 1.0 =
 * First version. Why go beta?
