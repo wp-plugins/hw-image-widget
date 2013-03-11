@@ -77,6 +77,7 @@ For this to work that filter will need to be registered prior to admin_enqueue_s
 
 = 1.1 =
 * Fixed front-end display issue.
+* Fixed media upload tab not working.
 
 = 1.0 =
 * First version. Why go beta?
