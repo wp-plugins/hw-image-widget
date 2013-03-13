@@ -3,7 +3,7 @@ Contributors: puffythepirateboy
 Tags: image widget, image, widget, responsive
 Requires at least: 3.4
 Tested up to: 3.5.1
-Stable tag: 1.1
+Stable tag: 1.2
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -74,6 +74,10 @@ For this to work that filter will need to be registered prior to admin_enqueue_s
 4. Selecting an image.
 
 == Changelog ==
+
+= 1.2 =
+* Some refactoring to support PHP5 < 5.3
+* Dropped loading "optimizations" to improve overall compatability with custom widget area handling plugins. 
 
 = 1.1 =
 * Fixed front-end display issue.

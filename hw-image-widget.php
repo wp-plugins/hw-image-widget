@@ -4,18 +4,12 @@ Plugin Name: HW Image Widget
 Plugin URI: http://wordpress.org/extend/plugins/hw-image-widget/
 Description: Image widget that will allow you to choose responsive or fixed sized behavior. Includes TinyMCE rich text editing of the text description. A custom HTML-template for the widget can be created in the active theme folder (a default template will be used if this custom template does not exist).
 Author: H&aring;kan Wennerberg
-Version: 1.1
+Version: 1.2
 Author URI: http://wpnotebook.wordpress.com/
 License: LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.html
 */
 
-add_action( 'admin_print_footer_scripts', function() {
-	if ( stristr( $_SERVER['REQUEST_URI'], 'widgets.php') ) {
-		HW_Image_Widget::echoEditor();
-	}
-});
-
-add_action('admin_enqueue_scripts', function() {
+function hwim_action_admin_enqueue_scripts() {
 	if ( stristr( $_SERVER['REQUEST_URI'], 'widgets.php' ) ) {
 		wp_enqueue_script(
 			'hw_image_widget_back_end',
@@ -40,15 +34,25 @@ add_action('admin_enqueue_scripts', function() {
 		}
 		add_thickbox();
 	}
-});
+}
+add_action( 'admin_enqueue_scripts', 'hwim_action_admin_enqueue_scripts' );
 
-add_action( 'plugins_loaded', function() {
+function hwim_action_admin_footer() {
+	if ( stristr( $_SERVER['REQUEST_URI'], 'widgets.php') ) {
+		HW_Image_Widget::echoEditor();
+	}
+}
+add_action( 'admin_footer', 'hwim_action_admin_footer' );
+
+function hwim_action_plugins_loaded() {
 	load_plugin_textdomain( 'hwim', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-});
+}
+add_action( 'plugins_loaded', 'hwim_action_plugins_loaded' );
 
-add_action( 'widgets_init', function() {
+function hwim_action_widgets_init() {
 	register_widget( 'HW_Image_Widget' );
-});
+}
+add_action( 'widgets_init', 'hwim_action_widgets_init' );
 
 
 class HW_Image_Widget extends \WP_Widget {
