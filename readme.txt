@@ -32,7 +32,7 @@ Use standard installation process for a plug-in:
 
 = Can I change the way the widget is displayed? =
 
-Yes, you can create a file named hwim_template.php in your active theme folder. If this file exists, the HW Image Widget will use that file to render the widget. You can copy the default template as base. It is located in plugins/hw-image-widget/html/front-end.php.
+Yes, you can create a file named hwim-template.php in your active theme folder. If this file exists, the HW Image Widget will use that file to render the widget. You can copy the default template as base. It is located in plugins/hw-image-widget/html/front-end.php.
 
 = Can I put the title below the image instead? =
 
