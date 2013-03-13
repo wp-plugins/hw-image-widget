@@ -18,6 +18,10 @@ jQuery(document).ready(function() {
 			jQuery('.remove-image-link', currentWidget).hide();
 			jQuery('.img-thumb', currentWidget).html('');
 			jQuery('.src', currentWidget).attr('value', '');
+			jQuery('.display-width', currentWidget).attr('value', '');
+			jQuery('.display-height', currentWidget).attr('value', '');
+			jQuery('.original-width', currentWidget).attr('value', '');
+			jQuery('.original-height', currentWidget).attr('value', '');
 		}
 		/* Display text editor */
 		if (jQuery(evt.srcElement).hasClass('edit-text') || editText == true) {
@@ -80,10 +84,10 @@ jQuery(document).ready(function() {
 	/* Set selected image to placeholder */
 	window.send_to_editor = function(html) {
 		var src = jQuery('img', html).attr('src');
-		var title = jQuery('img', html).attr('title');
+		var title = jQuery('img', html).data('hwim-title');
 		var alt = jQuery('img', html).attr('alt');
-		var width = jQuery('img', html).attr('width');
-		var height = jQuery('img', html).attr('height');
+		var width = jQuery('img', html).data('hwim-w');
+		var height = jQuery('img', html).data('hwim-h');
 
 		jQuery('.remove-image-link', currentWidget).show();
 		jQuery('.img-thumb', currentWidget).html('<img src="' + src + '" style="max-width: 100%;">');

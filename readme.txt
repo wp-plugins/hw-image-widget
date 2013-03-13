@@ -3,7 +3,7 @@ Contributors: puffythepirateboy
 Tags: image widget, image, widget, responsive
 Requires at least: 3.4
 Tested up to: 3.5.1
-Stable tag: 1.2
+Stable tag: 1.3
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -74,6 +74,10 @@ For this to work that filter will need to be registered prior to admin_enqueue_s
 4. Selecting an image.
 
 == Changelog ==
+
+= 1.3 =
+* Clearing image height/width attributes when removing image.
+* Fixing width/height not being set in WP 3.5+
 
 = 1.2 =
 * Some refactoring to support PHP5 < 5.3

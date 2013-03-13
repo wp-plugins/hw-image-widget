@@ -4,7 +4,7 @@ Plugin Name: HW Image Widget
 Plugin URI: http://wordpress.org/extend/plugins/hw-image-widget/
 Description: Image widget that will allow you to choose responsive or fixed sized behavior. Includes TinyMCE rich text editing of the text description. A custom HTML-template for the widget can be created in the active theme folder (a default template will be used if this custom template does not exist).
 Author: H&aring;kan Wennerberg
-Version: 1.2
+Version: 1.3
 Author URI: http://wpnotebook.wordpress.com/
 License: LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.html
 */
@@ -15,7 +15,7 @@ function hwim_action_admin_enqueue_scripts() {
 			'hw_image_widget_back_end',
 			plugins_url( 'js/back-end.js', __FILE__ ),
 			array( 'jquery' ),
-			'1.0'
+			'1.3'
 		);
 		// Allow disable loading of Twitter bootstrap in case of conflict.
 		if ( apply_filters( 'hwim_load_bootstrap', true ) === true ) {
@@ -23,13 +23,13 @@ function hwim_action_admin_enqueue_scripts() {
 				'hwim_bootstrap',
 				plugins_url( 'js/bootstrap.min.js', __FILE__ ),
 				array( 'jquery' ),
-				'1.0'
+				'1.3'
 			);
 			wp_enqueue_style(
 				'hwim_bootstrap',
 				plugins_url( 'css/bootstrap.min.css', __FILE__ ),
 				array(),
-				'1.0'
+				'1.3'
 			);
 		}
 		add_thickbox();
@@ -54,6 +54,15 @@ function hwim_action_widgets_init() {
 }
 add_action( 'widgets_init', 'hwim_action_widgets_init' );
 
+function hwim_filter_image_send_to_editor( $html, $id, $caption, $title, $align, $url, $size, $alt ) {
+	$img = wp_get_attachment_image_src( $id, $size, false );
+	$html = str_replace(
+			'<img ',
+			'<img data-hwim-w="' . $img[1] . '" data-hwim-h="' . $img[2] . '" data-hwim-title="' . esc_attr( $title ) . '" ',
+			$html );
+	return $html;
+}
+add_filter( 'image_send_to_editor', 'hwim_filter_image_send_to_editor', 1, 8 );
 
 class HW_Image_Widget extends \WP_Widget {
 
@@ -150,7 +159,7 @@ class HW_Image_Widget extends \WP_Widget {
 	protected function merge_arrays( $array1, $array2 ) {
 		return array_diff_key($array1, $array2) + $array2;
 	}
-	
+
 	/**
 	 * \see WP_Widget::widget
 	 */
