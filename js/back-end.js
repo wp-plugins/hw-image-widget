@@ -83,12 +83,20 @@ jQuery(document).ready(function() {
 
 	/* Set selected image to placeholder */
 	window.send_to_editor = function(html) {
+		
+		// Workaround for jQuery issue when linking external images.
+		html = '<span>' + html + '</span>';
+		
 		var src = jQuery('img', html).attr('src');
 		var title = jQuery('img', html).data('hwim-title');
 		var alt = jQuery('img', html).attr('alt');
 		var width = jQuery('img', html).data('hwim-w');
 		var height = jQuery('img', html).data('hwim-h');
 
+		// When linking external URL.
+		if ( !!width ) { width = jQuery('img', html).attr('width'); }
+		if ( !!height ) { width = jQuery('img', html).attr('height'); }
+		
 		jQuery('.remove-image-link', currentWidget).show();
 		jQuery('.img-thumb', currentWidget).html('<img src="' + src + '" style="max-width: 100%;">');
 		jQuery('.src').attr('value', src);
