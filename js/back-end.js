@@ -99,7 +99,7 @@ jQuery(document).ready(function() {
 		
 		jQuery('.remove-image-link', currentWidget).show();
 		jQuery('.img-thumb', currentWidget).html('<img src="' + src + '" style="max-width: 100%;">');
-		jQuery('.src').attr('value', src);
+		jQuery('.src', currentWidget).attr('value', src);
 		jQuery('.display-width', currentWidget).attr('value', width);
 		jQuery('.display-height', currentWidget).attr('value', height);
 		jQuery('.original-width', currentWidget).attr('value', width);
