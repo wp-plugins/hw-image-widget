@@ -9,6 +9,8 @@ jQuery(document).ready(function() {
 			evt.preventDefault();
 			currentWidget = evt.currentTarget;
 			var tbHeight = Math.floor(jQuery(window).height() * 0.8);
+			window.hwimOldFunc = window.send_to_editor;
+			window.send_to_editor = editorResponse;
 			tb_show('HW Image Widget', 'media-upload.php?post_id=0&type=image&context=hwim&post_mime_type=image&tab=library&TB_iframe=true&width=640&height=' + tbHeight);
 		}
 		/* Remove image from widget. */
@@ -82,8 +84,9 @@ jQuery(document).ready(function() {
 	});
 
 	/* Set selected image to placeholder */
-	window.send_to_editor = function(html) {
-		
+	//window.send_to_editor = function(html) {
+	function editorResponse(html) {
+	
 		// Workaround for jQuery issue when linking external images.
 		html = '<span>' + html + '</span>';
 		
@@ -109,7 +112,8 @@ jQuery(document).ready(function() {
 		if (title != '' && jQuery('.title', currentWidget).attr('value') == '') {
 			jQuery('.title', currentWidget).attr('value', title);
 		}
-		
+
+		window.send_to_editor = window.hwimOldFunc;
 		tb_remove();
 	}
 });
