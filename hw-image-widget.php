@@ -4,7 +4,7 @@ Plugin Name: HW Image Widget
 Plugin URI: http://wordpress.org/extend/plugins/hw-image-widget/
 Description: Image widget that will allow you to choose responsive or fixed sized behavior. Includes TinyMCE rich text editing of the text description. A custom HTML-template for the widget can be created in the active theme folder (a default template will be used if this custom template does not exist).
 Author: H&aring;kan Wennerberg
-Version: 1.6
+Version: 2.0
 Author URI: http://wpnotebook.wordpress.com/
 License: LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.html
 */
@@ -12,34 +12,25 @@ License: LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.html
 function hwim_action_admin_enqueue_scripts() {
 	if ( stristr( $_SERVER['REQUEST_URI'], 'widgets.php' ) ) {
 		wp_enqueue_script(
-			'hw_image_widget_back_end',
+			'hwim-be',
 			plugins_url( 'js/back-end.js', __FILE__ ),
 			array( 'jquery' ),
 			'1.6'
 		);
-		// Allow disable loading of Twitter bootstrap in case of conflict.
-		if ( apply_filters( 'hwim_load_bootstrap', true ) === true ) {
-			wp_enqueue_script(
-				'hwim_bootstrap',
-				plugins_url( 'js/bootstrap.min.js', __FILE__ ),
-				array( 'jquery' ),
-				'1.6'
-			);
-			wp_enqueue_style(
-				'hwim_bootstrap',
-				plugins_url( 'css/bootstrap.min.css', __FILE__ ),
-				array(),
-				'1.6'
-			);
-		}
-		add_thickbox();
+		wp_localize_script( 'hwim-be', 'objectL10n', array(
+			'insertIntoWidget'  => __( 'Insert into widget', 'hwim' ),
+			'insertMedia' => __( 'Insert Media', 'hwim' ),
+			'returnToLibrary' => __( 'Return to Library', 'hwim' ),
+			'selectImage' => __( 'Select Image', 'hwim' ),
+			'insertImage' => __( 'Insert Image', 'hwim' )
+		) );
 	}
 }
 add_action( 'admin_enqueue_scripts', 'hwim_action_admin_enqueue_scripts' );
 
 function hwim_action_admin_footer() {
 	if ( stristr( $_SERVER['REQUEST_URI'], 'widgets.php') ) {
-		HW_Image_Widget::echoEditor();
+		HW_Image_Widget::renderTextEditor();
 	}
 }
 add_action( 'admin_footer', 'hwim_action_admin_footer' );
@@ -54,20 +45,10 @@ function hwim_action_widgets_init() {
 }
 add_action( 'widgets_init', 'hwim_action_widgets_init' );
 
-function hwim_filter_image_send_to_editor( $html, $id, $caption, $title, $align, $url, $size, $alt ) {
-	$img = wp_get_attachment_image_src( $id, $size, false );
-	$html = str_replace(
-			'<img ',
-			'<img data-hwim-w="' . $img[1] . '" data-hwim-h="' . $img[2] . '" data-hwim-title="' . esc_attr( $title ) . '" ',
-			$html );
-	return $html;
-}
-add_filter( 'image_send_to_editor', 'hwim_filter_image_send_to_editor', 1, 8 );
 
 class HW_Image_Widget extends \WP_Widget {
 
 	protected $widget_id = 'hwim';
-	protected static $tb = false;
 
 	/**
 	 * Default constructor.
@@ -77,10 +58,9 @@ class HW_Image_Widget extends \WP_Widget {
 		parent::__construct( $this->widget_id, 'HW Image Widget', $widget_ops );
 	}
 
-	static function echoEditor() {
+	static function renderTextEditor() {
 		$tinymce_settings['media_buttons'] = '';
-		$tinymce_settings['tiny_mce'] = array( 'height' => 200 );
-		include 'html/editor.php';
+		include 'html/text-editor.php';
 	}
 
 	/**
@@ -88,7 +68,7 @@ class HW_Image_Widget extends \WP_Widget {
 	*/
 	function form( $instance ) {
 		$widget_id = ( isset( $this->id ) ? $this->id : '0' );
-		$div_id = $this->widget_id . $widget_id;
+		$div_id = $widget_id;
 
 		// Load widget defaults and ovveride them with user defined settings.
 		$instance = $this->merge_arrays( $this->get_defaults(), $instance );

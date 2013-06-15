@@ -10,7 +10,8 @@
 	</p>
 	<div class="form-padding">
 		<label><?php _e( 'Text:', 'hwim' ); ?></label>
-		<div class="text-preview widefat edit-text"><?php echo $instance['text']; ?></div>
+		<div class="text-preview widefat edit-text"
+			 onClick="hwim.openTextEditor('#<?php echo $div_id; ?>');"><?php echo $instance['text']; ?></div>
 		<input type="hidden" id="<?php echo $this->get_field_id( 'text' ); ?>"
 			   class="text"
 			   name="<?php echo $this->get_field_name( 'text' ); ?>"
@@ -18,7 +19,7 @@
 	</div>
 	<p>
 		<label for="<?php echo $this->get_field_id( 'src' ); ?>"><?php _e( 'Image:', 'hwim' ); ?><br />
-			<a href="#" id="<?php echo $this->get_field_id( 'img-button' ); ?>" class="select-image"><?php esc_html_e( 'Select image', 'hwim' ); ?></a><span class="remove-image-link"<?php if ( $instance['src'] == '') { echo ' style="display: none;"'; } ?>>, <a href="#" class="remove-image"><?php esc_html_e( 'Remove image', 'hwim' ); ?></a></span>
+			<a id="<?php echo $this->get_field_id( 'img-button' ); ?>" class="select-image" onClick="hwim.selectImage('#<?php echo $div_id; ?>');"><?php esc_html_e( 'Select image', 'hwim' ); ?></a><span class="remove-image-link"<?php if ( $instance['src'] == '') { echo ' style="display: none;"'; } ?>>, <a class="remove-image" onClick="hwim.removeImage('#<?php echo $div_id; ?>');"><?php esc_html_e( 'Remove image', 'hwim' ); ?></a></span>
 			<div id="<?php echo $this->get_field_id( 'img-thumb' ); ?>" class="img-thumb">
 			<?php
 				if ( $instance['src'] != '') {
@@ -39,7 +40,8 @@
 				id="<?php echo $this->get_field_id( 'display_size' ); ?>"
 				name="<?php echo $this->get_field_name( 'display_size' ); ?>"
 				type="text"
-				value="<?php esc_attr_e( $instance['display_size'] ); ?>">
+				value="<?php esc_attr_e( $instance['display_size'] ); ?>"
+				onChange="hwim.displaySize('#<?php echo $div_id; ?>', this.value);">
 				<?php
 				$targets = $this->get_display_sizes();
 				foreach ( $targets as $value => $display ) {
@@ -59,13 +61,15 @@
 					id="<?php echo $this->get_field_id( 'display_width' ); ?>"
 					name="<?php echo $this->get_field_name( 'display_width' ); ?>"
 					type="text"
-					value="<?php esc_attr_e( $instance['display_width'] ); ?>" />
+					value="<?php esc_attr_e( $instance['display_width'] ); ?>"
+					onChange="hwim.calcAspectRatio('#<?php echo $div_id; ?>', 'x');" />
 				x
 				<input class="small-text display-height"
 					id="<?php echo $this->get_field_id( 'display_height' ); ?>"
 					name="<?php echo $this->get_field_name( 'display_height' ); ?>"
 					type="text"
-					value="<?php esc_attr_e( $instance['display_height'] ); ?>" />
+					value="<?php esc_attr_e( $instance['display_height'] ); ?>"
+					onChange="hwim.calcAspectRatio('#<?php echo $div_id; ?>', 'y');" />
 				px
 				<input class="original-width"
 					id="<?php echo $this->get_field_id( 'original_width' ); ?>"
@@ -84,7 +88,8 @@
 					   id="<?php echo $this->get_field_id( 'keep_aspect_ratio' ); ?>"
 					   name="<?php echo $this->get_field_name( 'keep_aspect_ratio' ); ?>"
 					   value="1"
-						<?php checked( $instance['keep_aspect_ratio'], true ); ?> />
+						<?php checked( $instance['keep_aspect_ratio'], true ); ?>
+					   onChange="hwim.keepAspectRatio('#<?php echo $div_id; ?>');" />
 				<label for="<?php echo $this->get_field_id( 'keep_aspect_ratio' ); ?>"><?php _e( 'Keep aspect ratio.', 'hwim' ); ?></label>
 			</p>
 		</div>

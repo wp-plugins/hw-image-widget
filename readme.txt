@@ -1,15 +1,18 @@
 === HW Image Widget ===
 Contributors: puffythepirateboy
 Tags: image widget, image, widget, responsive
-Requires at least: 3.4
+Requires at least: 3.5
 Tested up to: 3.5.1
-Stable tag: 1.6
+Stable tag: 2.0
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
 Image widget that will allow you to choose responsive or fixed sized behavior. Includes TinyMCE rich text editing of the text description.
 
 == Description ==
+
+This widget requires WordPress 3.5 or newer.
+
 
 Primary features of HW Image Widget:
 
@@ -58,14 +61,6 @@ Yes, you can change the widget default settings by using the hwim_get_defaults f
 'target_option' => '',
 'target_name' => ''
 
-= HW Image Widget back-end interfere with another component, what can I do? =
-
-If there is a problem in the back-end widget page, it might be due to a collision of the Twitter Bootstrap. You can disable loading this by the HW Image Widget plug-in if it is already available by using a filter:
-
-add_filter( 'hwim_load_bootstrap', __return_false );
-
-For this to work that filter will need to be registered prior to admin_enqueue_scripts action.
-
 == Screenshots ==
 
 1. Back-end, using responsive behavior.
@@ -74,6 +69,14 @@ For this to work that filter will need to be registered prior to admin_enqueue_s
 4. Selecting an image.
 
 == Changelog ==
+
+= 2.0 =
+* Implemented updated Media Library introduced in WordPress 3.5.
+* Updated text editor user interface to be more consistent with WordPress.
+* Dropped support for WordPress older then 3.5 to keep it light and wonderful.
+* Dropped usage of Twitter Bootstrap.
+* Rewrote JavaScript to be less receptive to conflicts with other plugins (could still happen though).
+* Fixed TinyMCE editor height when its first opened in the browser. 
 
 = 1.6 =
 * Fixed image selection issue when using multiple widgets.
