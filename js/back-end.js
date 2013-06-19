@@ -165,8 +165,6 @@ jQuery(document).ready(function() {
 		},
 				
 		init: function() {
-			console.log('init');
-			
 			// Bind editor buttons.
 			jQuery('#hwim-te-backdrop').bind('click', {save: false}, this.closeTextEditor);
 			jQuery('.hwim-te-close').bind('click', {save: false}, this.closeTextEditor);
@@ -174,8 +172,12 @@ jQuery(document).ready(function() {
 			jQuery('.hwim-te-btn-save').bind('click', {save: true}, this.closeTextEditor);
 			
 			// Keep a copy of original image library.
-			this.originalMediaLibrary = wp.media.view.MediaFrame.Select;
-			this.hwimMediaLibrary = this.createMediaLibrary();
+			try {
+				this.originalMediaLibrary = wp.media.view.MediaFrame.Select;
+				this.hwimMediaLibrary = this.createMediaLibrary();
+			} catch(e) {
+				console.log('Unable to load Media Library');
+			}
 		},
 		
 		getCookie: function(c_name)	{

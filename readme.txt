@@ -3,7 +3,7 @@ Contributors: puffythepirateboy
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
 Tested up to: 3.5.1
-Stable tag: 2.0
+Stable tag: 2.1
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -69,6 +69,10 @@ Yes, you can change the widget default settings by using the hwim_get_defaults f
 4. Selecting an image.
 
 == Changelog ==
+
+= 2.1 =
+* Fixed JavaScript bug that could cause widget page JavaScrips to fail.
+* Gracefully fail on old WordPress versions.
 
 = 2.0 =
 * Implemented updated Media Library introduced in WordPress 3.5.
