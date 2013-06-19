@@ -1,5 +1,5 @@
 === HW Image Widget ===
-Contributors: puffythepirateboy
+Contributors: Håkan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
 Tested up to: 3.5.1
