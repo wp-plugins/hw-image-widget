@@ -118,7 +118,8 @@
 				id="<?php echo $this->get_field_id( 'target_option' ); ?>"
 				name="<?php echo $this->get_field_name( 'target_option' ); ?>"
 				type="text"
-				value="<?php esc_attr_e( $instance['target_option'] ); ?>">
+				value="<?php esc_attr_e( $instance['target_option'] ); ?>"
+				onChange="hwim.target('#<?php echo $div_id; ?>');" >
 				<?php
 				$targets = $this->get_targets();
 				foreach ( $targets as $value => $display ) {

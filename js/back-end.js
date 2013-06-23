@@ -104,6 +104,14 @@ jQuery(document).ready(function() {
 				this.calcAspectRatio(id, 'x');
 			}
 		},
+		
+		target: function(id) {
+			if (jQuery(id + ' .target-option').val() != 'other') {
+				jQuery(id + ' .target-name').hide();
+			} else {
+				jQuery(id + ' .target-name').show();
+			}
+		},
 				
 		calcAspectRatio: function(id, axis) {
 			console.log('calcAspectRatio: ' + id + ', ' + axis);

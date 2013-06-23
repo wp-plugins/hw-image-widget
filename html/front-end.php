@@ -35,8 +35,10 @@
 		// Linked?
 		if ( $instance['url'] != '' ) {
 			$a = '<a href="' . esc_attr( $instance['url'] ) . '"';
-			if ( $instance['target_name'] != '' ) {
+			if ( $instance['target_option'] == 'other' ) {
 				$a .= ' target="' . esc_attr( $instance['target_name'] ) . '"';
+			} elseif ( $instance['target_option'] != '' ) {
+				$a .= ' target="' . esc_attr( $instance['target_option'] ) . '"';
 			}
 			if ( $instance['alt'] != '' ) {
 				$a .= ' alt="' . esc_attr( $instance['alt'] ) . '"';
@@ -50,4 +52,8 @@
 	if ( $instance['text'] != '' ) {
 		echo '<div class="hwim-text">' . $instance['text'] . '</div>';
 	}
+	
+	echo '<pre>';
+	print_r($instance  );
+	echo '</pre>';
 ?>
