@@ -3,7 +3,7 @@ Contributors: H&aring;kan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
 Tested up to: 3.5.1
-Stable tag: 2.2
+Stable tag: 2.3
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -69,6 +69,9 @@ Yes, you can change the widget default settings by using the hwim_get_defaults f
 4. Selecting an image.
 
 == Changelog ==
+
+= 2.3 =
+* Removed debug snippet.
 
 = 2.2 =
 * Fixed bug with the target option.
