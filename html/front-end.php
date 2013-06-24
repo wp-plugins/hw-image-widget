@@ -52,8 +52,4 @@
 	if ( $instance['text'] != '' ) {
 		echo '<div class="hwim-text">' . $instance['text'] . '</div>';
 	}
-	
-	echo '<pre>';
-	print_r($instance  );
-	echo '</pre>';
 ?>
