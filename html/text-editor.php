@@ -6,6 +6,7 @@
 		width: 100%;
 		display: inline-block;
 		cursor: text;
+		border-color: #dfdfdf;
 	}
 	div.hwim .form-padding {
 		margin-bottom: 12px;
