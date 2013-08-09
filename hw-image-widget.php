@@ -4,19 +4,21 @@ Plugin Name: HW Image Widget
 Plugin URI: http://wordpress.org/extend/plugins/hw-image-widget/
 Description: Image widget that will allow you to choose responsive or fixed sized behavior. Includes TinyMCE rich text editing of the text description. A custom HTML-template for the widget can be created in the active theme folder (a default template will be used if this custom template does not exist).
 Author: H&aring;kan Wennerberg
-Version: 2.3.1
+Version: 2.3.2
 Author URI: http://wpnotebook.wordpress.com/
 License: LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.html
 */
 
 function hwim_action_admin_enqueue_scripts() {
 	if ( stristr( $_SERVER['REQUEST_URI'], 'widgets.php' ) ) {
+		set_user_setting( 'editor', 'tinymce' );
+		setcookie( 'wp-settings-' . get_current_user_id(), 'editor=tinymce', time() + YEAR_IN_SECONDS, SITECOOKIEPATH );
 		wp_enqueue_media();
 		wp_enqueue_script(
 			'hwim-be',
 			plugins_url( 'js/back-end.js', __FILE__ ),
 			array( 'jquery' ),
-			'2.3.1'
+			'2.3.2'
 		);
 		wp_localize_script( 'hwim-be', 'objectL10n', array(
 			'insertIntoWidget'  => __( 'Insert into widget', 'hwim' ),
