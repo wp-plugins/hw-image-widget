@@ -23,6 +23,9 @@ Primary features of HW Image Widget:
 * Available in English and Swedish.
 
 
+NOTE: Please note that responsive behavior means that all height/width attributes are stripped from the image. It is the responsibility of the active THEME to actually define the responsive behavior.
+
+
 
 == Installation ==
 
