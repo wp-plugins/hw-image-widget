@@ -3,7 +3,7 @@ Contributors: Håkan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
 Tested up to: 3.6
-Stable tag: 2.3.2
+Stable tag: 2.4
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -69,6 +69,9 @@ Yes, you can change the widget default settings by using the hwim_get_defaults f
 4. Selecting an image.
 
 == Changelog ==
+
+= 2.4 =
+* Fixed issue that could cause the TinyMCE editor to fail while in WP_DEBUG on some setups.
 
 = 2.3.2 =
 * Fixed issue with text editor now opening when regular post editor was left in HTML-view.
