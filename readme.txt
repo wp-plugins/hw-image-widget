@@ -2,8 +2,8 @@
 Contributors: Håkan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
-Tested up to: 3.6
-Stable tag: 2.4
+Tested up to: 3.6.1
+Stable tag: 2.5
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -25,6 +25,7 @@ Primary features of HW Image Widget:
 
 NOTE: Please note that responsive behavior means that all height/width attributes are stripped from the image. It is the responsibility of the active THEME to actually define the responsive behavior.
 
+For more info, visit http://webartisan.se/hw-image-widget/
 
 
 == Installation ==
@@ -38,31 +39,18 @@ Use standard installation process for a plug-in:
 
 = Can I change the way the widget is displayed? =
 
-Yes, you can create a file named hwim-template.php in your active theme folder. If this file exists, the HW Image Widget will use that file to render the widget. You can copy the default template as base. It is located in plugins/hw-image-widget/html/front-end.php.
+Yes
 
 = Can I put the title below the image instead? =
 
-Yes, first you need to create a custom HTML-template for the widget (see above). Then you can use the hwim_title filter to remove the default title placement.
-
-add_filter( 'hwim_title', function( $title ) { return ''; } )
+Yes
 
 = Can I change the default settings of the widget? =
 
-Yes, you can change the widget default settings by using the hwim_get_defaults filter. It takes a single parameter (array). Default values are:
+Yes
 
-'title' => '',
-'text' => '',
-'src' => '',
-'display_size' => 'responsive',
-'display_width' => '',
-'display_height' => '',
-'original_width' => '',
-'original_height' => '',
-'keep_aspect_ratio' => true,
-'alt' => '',
-'url' => '',
-'target_option' => '',
-'target_name' => ''
+For more info on how to achieve all of this and more, please visit http://webartisan.se/hw-image-widget/
+
 
 == Screenshots ==
 
@@ -72,6 +60,10 @@ Yes, you can change the widget default settings by using the hwim_get_defaults f
 4. Selecting an image.
 
 == Changelog ==
+
+= 2.5 =
+* Renamed template file so its more logical for template creators to locate and use. It will not break compatability with previous versions.
+* Launched http://webartisan.se/hw-image-widget/ with more helpful info on widget usage.
 
 = 2.4 =
 * Fixed issue that could cause the TinyMCE editor to fail while in WP_DEBUG on some setups.
