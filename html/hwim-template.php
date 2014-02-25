@@ -3,9 +3,9 @@
 	if ( $instance['src'] != '' ) {
 		$img = '<img class="hwim-image" src="' . $instance['src'] . '" ';
 
-		// Alt-text.
+		// Alt and title-text for image.
 		if ( $instance['alt'] != '' ) {
-			$img .= 'alt="' . esc_attr( $instance['alt'] ) . '" ';
+			$img .= 'alt="' . esc_attr( $instance['alt'] ) . '" title="' .  esc_attr( $instance['alt'] ) . '" ';
 		}
 
 		// Compile the style param.
