@@ -3,7 +3,7 @@
 	if ( $instance['src'] != '' ) {
 		$img = '<img class="hwim-image" src="' . $instance['src'] . '" ';
 
-		// Alt and title-text for image.
+		// Alt for image.
 		if ( $instance['alt'] != '' ) {
 			$img .= 'alt="' . esc_attr( $instance['alt'] ) . '" title="' .  esc_attr( $instance['alt'] ) . '" ';
 		}
@@ -39,9 +39,6 @@
 				$a .= ' target="' . esc_attr( $instance['target_name'] ) . '"';
 			} elseif ( $instance['target_option'] != '' ) {
 				$a .= ' target="' . esc_attr( $instance['target_option'] ) . '"';
-			}
-			if ( $instance['alt'] != '' ) {
-				$a .= ' alt="' . esc_attr( $instance['alt'] ) . '"';
 			}
 			$a .= '>';
 			$img = $a . $img . '</a>';
