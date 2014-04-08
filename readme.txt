@@ -2,8 +2,8 @@
 Contributors: Håkan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
-Tested up to: 3.6.1
-Stable tag: 2.5
+Tested up to: 3.8.1
+Stable tag: 2.7
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -60,6 +60,12 @@ For more info on how to achieve all of this and more, please visit http://webart
 4. Selecting an image.
 
 == Changelog ==
+
+= 2.7 =
+* Removing alt attribute from A-tag to conform with HTML standards.
+
+= 2.6 =
+* Adding title-attribute to the image tag.
 
 = 2.5 =
 * Renamed template file so its more logical for template creators to locate and use. It will not break compatability with previous versions.
