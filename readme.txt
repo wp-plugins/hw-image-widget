@@ -20,6 +20,7 @@ Primary features of HW Image Widget:
 * Uses TinyMCE for rich text editing of the image text field.
 * Allow you to create a custom widget HTML-template in the active theme to override the default layout.
 * Default settings can be overridden using filter.
+* Works with Carrington Build.
 * Available in English and Swedish.
 
 
