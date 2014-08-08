@@ -2,7 +2,7 @@
 Contributors: Håkan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
-Tested up to: 4.0-beta-2
+Tested up to: 4.0
 Stable tag: 4.0
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
