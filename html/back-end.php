@@ -11,7 +11,7 @@
 	<div class="form-padding">
 		<label><?php _e( 'Text:', 'hwim' ); ?></label>
 		<div class="text-preview widefat edit-text"
-			 onClick="hwim.openTextEditor('#<?php echo $div_id; ?>');"><?php echo $instance['text']; ?></div>
+			 onClick="hwim.openTextEditor('#<?php echo $div_id; ?>');"><?php echo $content_cleaned; ?></div>
 		<input type="hidden" id="<?php echo $this->get_field_id( 'text' ); ?>"
 			   class="text"
 			   name="<?php echo $this->get_field_name( 'text' ); ?>"
