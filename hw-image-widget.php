@@ -24,7 +24,6 @@ class HWIM_Setup {
 		
 		add_action('admin_enqueue_scripts', array($this, 'action_admin_enqueue_scripts'));
 		add_action('admin_footer', array($this, 'action_admin_footer'));
-		add_action('admin_init', array($this, 'action_admin_init'));
 		add_action('plugins_loaded', array($this, 'action_plugins_loaded'));
 		add_action('widgets_init', array($this, 'action_widgets_init'));
 		
@@ -40,7 +39,7 @@ class HWIM_Setup {
 				'hwim-be',
 				plugins_url( 'js/back-end.js', __FILE__ ),
 				array( 'jquery' ),
-				'3.0'
+				'4.0'
 			);
 			wp_localize_script( 'hwim-be', 'objectL10n', array(
 				'insertIntoWidget'  => __( 'Insert into widget', 'hwim' ),
@@ -54,15 +53,13 @@ class HWIM_Setup {
 	
 	function action_admin_footer() {
 		if ($this->load_hwim_backend) {
-			$tinymce_settings['media_buttons'] = '';
+			$tinymce_settings = array(
+				'editor_height' => 300,
+				'media_buttons' => '',
+				'default_editor' => 'visual' // Always load visual editor (else it will fail).
+			);
+			
 			include 'html/text-editor.php';
-		}
-	}
-
-	function action_admin_init() {
-		if ($this->load_hwim_backend) {
-			set_user_setting( 'editor', 'tinymce' );
-			setcookie( 'wp-settings-' . get_current_user_id(), 'editor=tinymce', time() + YEAR_IN_SECONDS, SITECOOKIEPATH );
 		}
 	}
 	
@@ -114,6 +111,19 @@ class HW_Image_Widget extends \WP_Widget {
 		// Load widget defaults and ovveride them with user defined settings.
 		$instance = $this->merge_arrays($this->get_defaults(), $instance);
 
+		// Remove SCRIPT tags for preview area.
+		$doc = new DOMDocument();
+		$doc->loadHTML('<?xml encoding="UTF-8">' . $instance['text']);
+		$script_tags = $doc->getElementsByTagName('script');
+
+		$length = $script_tags->length;
+
+		for ($i = 0; $i < $length; $i++) {
+			$script_tags->item($i)->parentNode->removeChild($script_tags->item($i));
+		}
+
+		$content_cleaned = $doc->saveHTML();
+		
 		// Display form.
 		include 'html/back-end.php';
 	}
