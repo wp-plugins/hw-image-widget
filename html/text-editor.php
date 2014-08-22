@@ -63,6 +63,32 @@
 		text-align: right;
 		padding-top: 16px;
 	}
+	.hwim .text-preview {
+		border-color: #ddd;
+		box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+		box-sizing: border-box;
+		border-width: 1px;
+		border-style: solid;
+		padding: 5px;
+	}
+	/* Carrington specific styles below */
+	.cfct-popup-content .hwim .text-preview {
+		background-color: #fff;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		box-sizing: border-box;
+	}
+	.cfct-popup-content .hwim .widefat {
+		display: block;
+		max-width: 400px;
+	}
+	.cfct-popup-content .hwim .img-thumb {
+		max-width: 400px;
+		height: auto;
+	}
+	.cfct-popup-content .hwim .small-text {
+		width: 50px;
+	}
 </style>
 <!-- HW Image Widget, Text Editor -->
 <div id="hwim-te-backdrop"></div>
