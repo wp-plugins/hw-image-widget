@@ -43,9 +43,10 @@
 			$a .= '>';
 			$img = $a . $img . '</a>';
 		}
+		
+		echo $img;
 	}
-	echo $img;
-
+	
 	if ( $instance['text'] != '' ) {
 		echo '<div class="hwim-text">' . $instance['text'] . '</div>';
 	}

@@ -3,7 +3,7 @@ Contributors: Håkan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 4.0
+Stable tag: 4.1
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -61,6 +61,9 @@ For more info on how to achieve all of this and more, please visit http://webart
 4. Selecting an image.
 
 == Changelog ==
+
+= 4.1 =
+* Fixed notice on front-end when no image has been selected.
 
 = 4.0 =
 * Added support for WordPress 4.0.
