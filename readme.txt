@@ -2,8 +2,8 @@
 Contributors: Håkan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
-Tested up to: 3.6.1
-Stable tag: 2.5
+Tested up to: 4.1
+Stable tag: 4.2
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -20,6 +20,7 @@ Primary features of HW Image Widget:
 * Uses TinyMCE for rich text editing of the image text field.
 * Allow you to create a custom widget HTML-template in the active theme to override the default layout.
 * Default settings can be overridden using filter.
+* Works with Carrington Build.
 * Available in English and Swedish.
 
 
@@ -60,6 +61,34 @@ For more info on how to achieve all of this and more, please visit http://webart
 4. Selecting an image.
 
 == Changelog ==
+
+= 4.2 =
+* Added backend link.
+
+= 4.1 =
+* Fixed notice on front-end when no image has been selected.
+
+= 4.0 =
+* Added support for WordPress 4.0.
+* Replaced custom image selection view with WordPress default "image insert" view to add compatability with WordPress 4.0 while still retaining pre-WordPress 4.0 compatability. This introduces a "Gallery" insertion option in the view, but its ignored by the HW Image Widget if used.
+* Made sure JavaScript tags are stripped from the text preview area so they do not execute.
+* Widget now depends on SimpleXML PHP-extention (usually available on shared hosting) to strip JavaScript from previews.
+* Fixed issues with the HTML view of the TinyMCE editor.
+* Made sure TinyMCE editor opens up with a decent height.
+* Made sure TinyMCE editor opens up in visual mode.
+* Removed all cookie handling (cookies are no longer edited to set proper TinyMCE height for some buggy WP-versions).
+* Fixed issue that could cause height/width attributes for fixed sized images in admin change when multiple image widgets are used and a new image is selected.
+
+= 3.0 =
+* Adding support for using HW Image Widget in the Carrington Build plugin (widgetized pages).
+* Refactoring plugin initialization.
+* Minor admin UI CSS tweaks.
+
+= 2.7 =
+* Removing alt attribute from A-tag to conform with HTML standards.
+
+= 2.6 =
+* Adding title-attribute to the image tag.
 
 = 2.5 =
 * Renamed template file so its more logical for template creators to locate and use. It will not break compatability with previous versions.
