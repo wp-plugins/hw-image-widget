@@ -11,6 +11,10 @@
 	div.hwim .form-padding {
 		margin-bottom: 12px;
 	}
+	div.hwim .help-text a {
+		text-decoration: none;
+		font-size: 10px;
+	}
 	#hwim-te-backdrop {
 		background: #000;
 		display: none;

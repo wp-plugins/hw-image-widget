@@ -141,4 +141,5 @@
 				<?php if ( $instance['target_option'] != 'other' ) echo 'style="display: none;"'; ?> />
 		</p>
 	</p>
+	<p class="help-text"><a href="https://wordpress.org/support/view/plugin-reviews/hw-image-widget" target="_blank">Please support by rating this open source plugin.</a></p>
 </div>
