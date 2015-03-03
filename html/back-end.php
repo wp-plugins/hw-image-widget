@@ -11,7 +11,7 @@
 	<div class="form-padding">
 		<label><?php _e( 'Text:', 'hwim' ); ?></label>
 		<div class="text-preview widefat edit-text"
-			 onClick="hwim.openTextEditor('#<?php echo $div_id; ?>');"><?php echo $instance['text']; ?></div>
+			 onClick="hwim.openTextEditor('#<?php echo $div_id; ?>');"><?php echo $content_cleaned; ?></div>
 		<input type="hidden" id="<?php echo $this->get_field_id( 'text' ); ?>"
 			   class="text"
 			   name="<?php echo $this->get_field_name( 'text' ); ?>"
@@ -132,13 +132,43 @@
 				?>
 			</select>
 		</label>
-		<p>
-			<input class="widefat target-name"
-				id="<?php echo $this->get_field_id( 'target_name' ); ?>"
-				name="<?php echo $this->get_field_name( 'target_name' ); ?>"
-				type="text"
-				value="<?php esc_attr_e( $instance['target_name'] ); ?>"
-				<?php if ( $instance['target_option'] != 'other' ) echo 'style="display: none;"'; ?> />
-		</p>
 	</p>
+	<p>
+		<input class="widefat target-name"
+			id="<?php echo $this->get_field_id( 'target_name' ); ?>"
+			name="<?php echo $this->get_field_name( 'target_name' ); ?>"
+			type="text"
+			value="<?php esc_attr_e( $instance['target_name'] ); ?>"
+			<?php if ( $instance['target_option'] != 'other' ) echo 'style="display: none;"'; ?> />
+	</p>
+	<p>
+		<label for="<?php echo $this->get_field_id( 'rel_option' ); ?>"><?php _e( 'Rel:', 'hwim' ); ?>
+			<select class="widefat rel-option"
+				id="<?php echo $this->get_field_id( 'rel_option' ); ?>"
+				name="<?php echo $this->get_field_name( 'rel_option' ); ?>"
+				type="text"
+				value="<?php esc_attr_e( $instance['rel_option'] ); ?>"
+				onChange="hwim.rel('#<?php echo $div_id; ?>');" >
+				<?php
+				$rels = $this->get_rels();
+				foreach ( $rels as $value => $display ) {
+					if ( $instance['rel_option'] == $value ) {
+						echo '<option value="' . esc_attr( $value ) . '" selected="selected">' . esc_html( $display ) . '</option>';
+					} else {
+						echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $display ) . '</option>';
+					}
+				}
+				?>
+			</select>
+		</label>
+	</p>
+	<p>
+		<input class="widefat rel-name"
+			id="<?php echo $this->get_field_id( 'rel_name' ); ?>"
+			name="<?php echo $this->get_field_name( 'rel_name' ); ?>"
+			type="text"
+			value="<?php esc_attr_e( $instance['rel_name'] ); ?>"
+			<?php if ( $instance['rel_option'] != 'other' ) echo 'style="display: none;"'; ?> />
+	</p>
+	<p class="help-text"><a href="https://wordpress.org/support/view/plugin-reviews/hw-image-widget" target="_blank">Please support by rating this open source plugin.</a></p>
 </div>

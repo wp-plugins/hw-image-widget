@@ -3,9 +3,9 @@
 	if ( $instance['src'] != '' ) {
 		$img = '<img class="hwim-image" src="' . $instance['src'] . '" ';
 
-		// Alt-text.
+		// Alt for image.
 		if ( $instance['alt'] != '' ) {
-			$img .= 'alt="' . esc_attr( $instance['alt'] ) . '" ';
+			$img .= 'alt="' . esc_attr( $instance['alt'] ) . '" title="' .  esc_attr( $instance['alt'] ) . '" ';
 		}
 
 		// Compile the style param.
@@ -40,15 +40,18 @@
 			} elseif ( $instance['target_option'] != '' ) {
 				$a .= ' target="' . esc_attr( $instance['target_option'] ) . '"';
 			}
-			if ( $instance['alt'] != '' ) {
-				$a .= ' alt="' . esc_attr( $instance['alt'] ) . '"';
+			if ( $instance['rel_option'] == 'other' ) {
+				$a .= ' rel="' . esc_attr( $instance['rel_name'] ) . '"';
+			} elseif ( $instance['rel_option'] != '' ) {
+				$a .= ' rel="' . esc_attr( $instance['rel_option'] ) . '"';
 			}
 			$a .= '>';
 			$img = $a . $img . '</a>';
 		}
+		
+		echo $img;
 	}
-	echo $img;
-
+	
 	if ( $instance['text'] != '' ) {
 		echo '<div class="hwim-text">' . $instance['text'] . '</div>';
 	}
