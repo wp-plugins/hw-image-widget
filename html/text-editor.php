@@ -8,6 +8,9 @@
 		cursor: text;
 		border-color: #dfdfdf;
 	}
+	#customize-controls div.hwim .text-preview {
+		height: 200px;
+	}
 	div.hwim .form-padding {
 		margin-bottom: 12px;
 	}
@@ -74,6 +77,9 @@
 		border-width: 1px;
 		border-style: solid;
 		padding: 5px;
+	}
+	#customize-controls div.hwim input.small-text {
+		width: 50px;
 	}
 	/* Carrington specific styles below */
 	.cfct-popup-content .hwim .text-preview {

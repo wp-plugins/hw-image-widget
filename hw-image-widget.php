@@ -4,7 +4,7 @@ Plugin Name: HW Image Widget
 Plugin URI: http://wordpress.org/extend/plugins/hw-image-widget/
 Description: Image widget that will allow you to choose responsive or fixed sized behavior. Includes TinyMCE rich text editing of the text description. A custom HTML-template for the widget can be created in the active theme folder (a default template will be used if this custom template does not exist). Carrington Build is supported.
 Author: H&aring;kan Wennerberg
-Version: 4.2
+Version: 4.3
 Author URI: http://webartisan.se/
 License: LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.html
 */
@@ -18,18 +18,20 @@ class HWIM_Setup {
 	
 	public function __construct() {
 		
+		if (stristr($_SERVER['REQUEST_URI'], 'widgets.php') || stristr($_SERVER['REQUEST_URI'], 'customize.php')) {
+			$this->load_hwim_backend = true;
+		}
+		
 		add_filter('cfct-admin-edit-post-type', array($this, 'filter_carrington_edit_post_type'), 99999);
 		add_filter('cfct-build-enabled-post-types', array($this, 'filter_carrington_enabled_post_types'), 99999);
 		add_filter('cfct-module-cfct-widget-module-hwim-admin-form', array($this, 'filter_carrington_admin_form'), 10, 2);
 		
 		add_action('admin_enqueue_scripts', array($this, 'action_admin_enqueue_scripts'));
-		add_action('admin_footer', array($this, 'action_admin_footer'));
+		add_action('admin_print_footer_scripts', array($this, 'action_admin_print_footer_scripts'));
 		add_action('plugins_loaded', array($this, 'action_plugins_loaded'));
 		add_action('widgets_init', array($this, 'action_widgets_init'));
 		
-		if (stristr($_SERVER['REQUEST_URI'], 'widgets.php')) {
-			$this->load_hwim_backend = true;
-		}
+		
 	}
 	
 	public function action_admin_enqueue_scripts() {
@@ -39,7 +41,7 @@ class HWIM_Setup {
 				'hwim-be',
 				plugins_url( 'js/back-end.js', __FILE__ ),
 				array( 'jquery' ),
-				'4.2'
+				'4.3'
 			);
 			wp_localize_script( 'hwim-be', 'objectL10n', array(
 				'insertIntoWidget'  => __( 'Insert into widget', 'hwim' ),
@@ -51,7 +53,7 @@ class HWIM_Setup {
 		}
 	}
 	
-	function action_admin_footer() {
+	function action_admin_print_footer_scripts() {
 		if ($this->load_hwim_backend) {
 			$tinymce_settings = array(
 				'editor_height' => 300,
@@ -147,7 +149,9 @@ class HW_Image_Widget extends \WP_Widget {
 			'alt' => '',
 			'url' => '',
 			'target_option' => '',
-			'target_name' => ''
+			'target_name' => '',
+			'rel_option' => '',
+			'rel_name' => ''
 		));
 	}
 
@@ -163,6 +167,37 @@ class HW_Image_Widget extends \WP_Widget {
 		));
 	}
 
+	/**
+	 * Returns a list of possible rels targets.
+	 *
+	 * \return array
+	 */
+	protected function get_rels() {
+		// Allow external parties to define a list of rels.
+		$rels = array(
+			'' => '',
+			'alternate' => 'alternate',
+			'author' => 'author',
+			'bookmark' => 'bookmark',
+			'help' => 'help',
+			'license' => 'license',
+			'next' => 'next',
+			'nofollow' => 'nofollow',
+			'noreferrer' => 'noreferrer',
+			'prev' => 'prev',
+			'search' => 'search',
+			'other' => __('Other', 'hwim')
+		);
+		$rels = apply_filters($this->widget_id . '_rels', $rels);
+		
+		
+		if (is_array($rels) === true) {
+			return $rels;
+		} else {
+			return array();
+		}
+	}
+	
 	/**
 	 * Returns a list of possible link targets.
 	 *

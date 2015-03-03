@@ -40,6 +40,11 @@
 			} elseif ( $instance['target_option'] != '' ) {
 				$a .= ' target="' . esc_attr( $instance['target_option'] ) . '"';
 			}
+			if ( $instance['rel_option'] == 'other' ) {
+				$a .= ' rel="' . esc_attr( $instance['rel_name'] ) . '"';
+			} elseif ( $instance['rel_option'] != '' ) {
+				$a .= ' rel="' . esc_attr( $instance['rel_option'] ) . '"';
+			}
 			$a .= '>';
 			$img = $a . $img . '</a>';
 		}

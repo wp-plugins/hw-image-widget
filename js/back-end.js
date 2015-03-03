@@ -44,6 +44,7 @@ jQuery(document).ready(function() {
 				
 				jQuery(hwim.editorForId + ' .text').attr('value', content);
 				jQuery(hwim.editorForId + ' .text-preview').html(content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, ' '));
+				hwim.updateCustomizer(hwim.editorForId);
 			}
 			
 			jQuery('#hwim-te-backdrop').css('display', 'none');
@@ -136,6 +137,7 @@ jQuery(document).ready(function() {
 			jQuery(id + ' .display-height').attr('value', '');
 			jQuery(id + ' .original-width').attr('value', '');
 			jQuery(id + ' .original-height').attr('value', '');
+			hwim.updateCustomizer(id);
 		},
 		
 		selectImage: function(id) {
@@ -153,12 +155,14 @@ jQuery(document).ready(function() {
 			wp.media.editor.send.attachment = function(selection, image) {
 				hwim.imageSelected(id, selection.size, image)
 				hwim.mediaClose();
+				hwim.updateCustomizer(id);
 			};
 
 			// Image was selected by URL.
 			wp.media.string.image = function (image) {
 				hwim.imageEmbeded(id, image);
 				hwim.mediaClose();
+				hwim.updateCustomizer(id);
 			}
 			
 			// Lightbox was closed, make sure to restore backed up functions.
@@ -177,6 +181,18 @@ jQuery(document).ready(function() {
 			} else {
 				jQuery(id + ' .target-name').show();
 			}
+		},
+		
+		rel: function(id) {
+			if (jQuery(id + ' .rel-option').val() != 'other') {
+				jQuery(id + ' .rel-name').hide();
+			} else {
+				jQuery(id + ' .rel-name').show();
+			}
+		},
+		
+		updateCustomizer: function(id) {
+			jQuery(id + ' .title').trigger('change');
 		}
 	};
 	hwim.init();

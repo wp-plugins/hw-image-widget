@@ -2,7 +2,7 @@
 Contributors: Håkan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
-Tested up to: 4.1
+Tested up to: 4.1.1
 Stable tag: 4.2
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
@@ -21,6 +21,7 @@ Primary features of HW Image Widget:
 * Allow you to create a custom widget HTML-template in the active theme to override the default layout.
 * Default settings can be overridden using filter.
 * Works with Carrington Build.
+* Works with the theme customizer.
 * Available in English and Swedish.
 
 
@@ -61,6 +62,10 @@ For more info on how to achieve all of this and more, please visit http://webart
 4. Selecting an image.
 
 == Changelog ==
+
+= 4.3 =
+* Added the rel-field including filter to alter its contents.
+* Made the widget fully support the theme customizer.
 
 = 4.2 =
 * Added backend link.
