@@ -4,65 +4,82 @@ Plugin Name: HW Image Widget
 Plugin URI: http://wordpress.org/extend/plugins/hw-image-widget/
 Description: Image widget that will allow you to choose responsive or fixed sized behavior. Includes TinyMCE rich text editing of the text description. A custom HTML-template for the widget can be created in the active theme folder (a default template will be used if this custom template does not exist). Carrington Build is supported.
 Author: H&aring;kan Wennerberg
-Version: 4.3
+Version: 4.4
 Author URI: http://webartisan.se/
 License: LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.html
 */
 
 $hwim_setup = new HWIM_Setup();
 
+abstract class HWIM_LoadBackend {
+	const No = 0;
+	const Widgets = 1;
+	const Customizer = 2;
+}
+
 class HWIM_Setup {
 	
 	protected $carrington_post_types = array();
-	protected $load_hwim_backend = false;
+	protected $load_hwim_backend = 0;
 	
 	public function __construct() {
 		
-		if (stristr($_SERVER['REQUEST_URI'], 'widgets.php') || stristr($_SERVER['REQUEST_URI'], 'customize.php')) {
-			$this->load_hwim_backend = true;
+		// Determine if backend should be loaded.
+		if (stristr($_SERVER['REQUEST_URI'], 'widgets.php')) {
+			$this->load_hwim_backend = HWIM_LoadBackend::Widgets;
 		}
+		if (stristr($_SERVER['REQUEST_URI'], 'customize.php')) {
+			$this->load_hwim_backend = HWIM_LoadBackend::Customizer;
+		}
+		
+		// Allow backend loading be overridden by third party.
+		$this->load_hwim_backend = apply_filters('hwim_load_backend', $this->load_hwim_backend);
 		
 		add_filter('cfct-admin-edit-post-type', array($this, 'filter_carrington_edit_post_type'), 99999);
 		add_filter('cfct-build-enabled-post-types', array($this, 'filter_carrington_enabled_post_types'), 99999);
 		add_filter('cfct-module-cfct-widget-module-hwim-admin-form', array($this, 'filter_carrington_admin_form'), 10, 2);
 		
-		add_action('admin_enqueue_scripts', array($this, 'action_admin_enqueue_scripts'));
-		add_action('admin_print_footer_scripts', array($this, 'action_admin_print_footer_scripts'));
+		if ($this->load_hwim_backend > HWIM_LoadBackend::No) {
+			add_action('admin_enqueue_scripts', array($this, 'action_admin_enqueue_scripts'));
+		}
+		
+		if ($this->load_hwim_backend == HWIM_LoadBackend::Widgets) {
+			add_action('admin_footer', array($this, 'action_admin_footer'));
+		}
+		
+		if ($this->load_hwim_backend == HWIM_LoadBackend::Customizer) {
+			add_action('customize_controls_print_footer_scripts', array($this, 'action_admin_footer'));
+		}
+
 		add_action('plugins_loaded', array($this, 'action_plugins_loaded'));
 		add_action('widgets_init', array($this, 'action_widgets_init'));
-		
-		
 	}
 	
 	public function action_admin_enqueue_scripts() {
-		if ($this->load_hwim_backend) {
-			wp_enqueue_media();
-			wp_enqueue_script(
-				'hwim-be',
-				plugins_url( 'js/back-end.js', __FILE__ ),
-				array( 'jquery' ),
-				'4.3'
-			);
-			wp_localize_script( 'hwim-be', 'objectL10n', array(
-				'insertIntoWidget'  => __( 'Insert into widget', 'hwim' ),
-				'insertMedia' => __( 'Insert Media', 'hwim' ),
-				'returnToLibrary' => __( 'Return to Library', 'hwim' ),
-				'selectImage' => __( 'Select Image', 'hwim' ),
-				'insertImage' => __( 'Insert Image', 'hwim' )
-			) );
-		}
+		wp_enqueue_media();
+		wp_enqueue_script(
+			'hwim-be',
+			plugins_url( 'js/back-end.js', __FILE__ ),
+			array( 'jquery' ),
+			'4.3'
+		);
+		wp_localize_script( 'hwim-be', 'objectL10n', array(
+			'insertIntoWidget'  => __( 'Insert into widget', 'hwim' ),
+			'insertMedia' => __( 'Insert Media', 'hwim' ),
+			'returnToLibrary' => __( 'Return to Library', 'hwim' ),
+			'selectImage' => __( 'Select Image', 'hwim' ),
+			'insertImage' => __( 'Insert Image', 'hwim' )
+		) );
 	}
 	
-	function action_admin_print_footer_scripts() {
-		if ($this->load_hwim_backend) {
-			$tinymce_settings = array(
-				'editor_height' => 300,
-				'media_buttons' => '',
-				'default_editor' => 'visual' // Always load visual editor (else it will fail).
-			);
-			
-			include 'html/text-editor.php';
-		}
+	public function action_admin_footer() {
+		$tinymce_settings = array(
+			'editor_height' => 300,
+			'media_buttons' => '',
+			'default_editor' => 'visual' // Always load visual editor (else it will fail).
+		);
+
+		include 'html/text-editor.php';
 	}
 	
 	function action_plugins_loaded() {
@@ -146,6 +163,7 @@ class HW_Image_Widget extends \WP_Widget {
 			'original_width' => '',
 			'original_height' => '',
 			'keep_aspect_ratio' => true,
+			'fill_width' => false,
 			'alt' => '',
 			'url' => '',
 			'target_option' => '',
@@ -232,8 +250,10 @@ class HW_Image_Widget extends \WP_Widget {
 	function widget($args, $instance) {
 		extract( $args );
 
+		$instance = $this->merge_arrays($this->get_defaults(), $instance);
 		$instance['title'] = \apply_filters('widget_title', \esc_attr(@$instance['title']));
 		$instance['keep_aspect_ratio'] = (isset($instance['keep_aspect_ratio'])) ? true : false;
+		$instance['fill_width'] = (bool)$instance['fill_width'];
 
 		// Output widget to front-end.
 		echo $before_widget;

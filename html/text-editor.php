@@ -1,16 +1,5 @@
 <style type="text/css">
-	div.hwim .text-preview {
-		height: 100px;
-		overflow: scroll;
-		resize: vertical;
-		width: 100%;
-		display: inline-block;
-		cursor: text;
-		border-color: #dfdfdf;
-	}
-	#customize-controls div.hwim .text-preview {
-		height: 200px;
-	}
+	
 	div.hwim .form-padding {
 		margin-bottom: 12px;
 	}
@@ -69,14 +58,6 @@
 	.hwim-te-buttons {
 		text-align: right;
 		padding-top: 16px;
-	}
-	.hwim .text-preview {
-		border-color: #ddd;
-		box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
-		box-sizing: border-box;
-		border-width: 1px;
-		border-style: solid;
-		padding: 5px;
 	}
 	#customize-controls div.hwim input.small-text {
 		width: 50px;

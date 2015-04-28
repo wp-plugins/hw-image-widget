@@ -1,3 +1,28 @@
+<style type="text/css">
+	.customize-control .hwim input[type="text"].small-text {
+		width: 50px;
+	}
+	div.hwim .text-preview {
+		height: 100px;
+		overflow: scroll;
+		resize: vertical;
+		width: 100%;
+		display: inline-block;
+		cursor: text;
+		border-color: #dfdfdf;
+	}
+	#customize-controls div.hwim .text-preview {
+		height: 200px;
+	}
+	.hwim .text-preview {
+		border-color: #ddd;
+		box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+		box-sizing: border-box;
+		border-width: 1px;
+		border-style: solid;
+		padding: 5px;
+	}
+</style>
 <div id="<?php echo $div_id; ?>" class="<?php esc_attr_e( $this->widget_id ); ?>">
 	<p>
 		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'hwim' ); ?>
@@ -54,8 +79,18 @@
 				?>
 			</select>
 		</label>
+		<div class="relative-size" style="margin-left: 20px;<?php if ( $instance['display_size'] == 'fixed' ) { echo ' display: none;'; } ?>">
+			<input class="checkbox fill_width"
+				   type="checkbox"
+				   id="<?php echo $this->get_field_id( 'fill_width' ); ?>"
+				   name="<?php echo $this->get_field_name( 'fill_width' ); ?>"
+				   value="1"
+					<?php checked( $instance['fill_width'], true ); ?>
+				   onChange="hwim.keepAspectRatio('#<?php echo $div_id; ?>');" />
+			<label for="<?php echo $this->get_field_id( 'fill_width' ); ?>"><?php _e( 'Fill width.', 'hwim' ); ?></label>
+		</div>
 		<div class="fixed-size" style="margin-left: 20px;<?php if ( $instance['display_size'] == 'responsive' ) { echo ' display: none;'; } ?>">
-			<p>
+			<p style="margin-top: 0;">
 				<label for="<?php echo $this->get_field_id( 'display_height' ); ?>"><?php _e( 'Size:', 'hwim' ); ?></label>
 				<input class="small-text display-width"
 					id="<?php echo $this->get_field_id( 'display_width' ); ?>"
@@ -82,7 +117,7 @@
 					type="hidden"
 					value="<?php esc_attr_e( $instance['original_height'] ); ?>">
 			</p>
-			<p>
+			<p style="margin-bottom: 0;">
 				<input class="checkbox keep-aspect-ratio"
 					   type="checkbox"
 					   id="<?php echo $this->get_field_id( 'keep_aspect_ratio' ); ?>"
