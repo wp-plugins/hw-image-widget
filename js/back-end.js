@@ -53,9 +53,13 @@ jQuery(document).ready(function() {
 		
 		displaySize: function(id, val) {
 			if (val == 'fixed') {
-				jQuery(id + ' div.fixed-size').slideDown(200);
+				jQuery(id + ' div.relative-size').slideUp(100, function() {
+					jQuery(id + ' div.fixed-size').slideDown(200);
+				});
 			} else {
-				jQuery(id + ' div.fixed-size').slideUp(200);
+				jQuery(id + ' div.fixed-size').slideUp(100, function() {
+					jQuery(id + ' div.relative-size').slideDown(200);
+				});
 			}
 		},
 		

@@ -13,6 +13,10 @@
 
 		if ( $instance['display_size'] == 'responsive' ) {
 			$style['max-width'] = '100%';
+			if ($instance['fill_width'] === true) {
+				$style['height'] = 'auto';
+				$style['width'] = '100%';
+			}
 		} else {
 			if ( $instance['display_width'] != '' ) {
 				$style['width'] = $instance['display_width'] . 'px';

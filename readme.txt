@@ -2,8 +2,8 @@
 Contributors: Håkan Wennerberg
 Tags: image widget, image, widget, responsive
 Requires at least: 3.5
-Tested up to: 4.1.1
-Stable tag: 4.3
+Tested up to: 4.2.1
+Stable tag: 4.4
 License: LGPLv3
 License URI: http://www.gnu.org/licenses/lgpl-3.0.html
 
@@ -17,15 +17,14 @@ This widget requires WordPress 3.5 or newer.
 Primary features of HW Image Widget:
 
 * Allow you to choose responsive or fixed behavior.
+* Fixed sized images allow you to define width/height with, or without kept aspect ratio.
+* Responsive sized images will allow you to define "fill width" or not.
 * Uses TinyMCE for rich text editing of the image text field.
 * Allow you to create a custom widget HTML-template in the active theme to override the default layout.
 * Default settings can be overridden using filter.
 * Works with Carrington Build.
 * Works with the theme customizer.
 * Available in English and Swedish.
-
-
-NOTE: Please note that responsive behavior means that all height/width attributes are stripped from the image. It is the responsibility of the active THEME to actually define the responsive behavior.
 
 For more info, visit http://webartisan.se/hw-image-widget/
 
@@ -62,6 +61,11 @@ For more info on how to achieve all of this and more, please visit http://webart
 4. Selecting an image.
 
 == Changelog ==
+
+= 4.4 =
+* Added option to fill width on responsive images.
+* Added filter (hwim_load_backend) to allow backend to load on custom pages.
+* Fixed several issues concerning the theme customizer.
 
 = 4.3 =
 * Added the rel-field including filter to alter its contents.
